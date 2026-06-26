@@ -1,0 +1,9 @@
+﻿target/
+bin/
+*.class
+*.log
+mini_projet.db
+.settings/
+.project
+.classpath
+.report_work/
