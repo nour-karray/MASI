@@ -32,6 +32,7 @@ public class DrawingRepository {
 
         try (Connection connection = databaseManager.getConnection()) {
             connection.setAutoCommit(false);
+            try {
             long drawingId;
             try (PreparedStatement drawingStatement =
                          connection.prepareStatement(insertDrawing, Statement.RETURN_GENERATED_KEYS)) {
@@ -62,8 +63,21 @@ public class DrawingRepository {
             }
 
             connection.commit();
-            connection.setAutoCommit(true);
             return drawingId;
+            } catch (SQLException | RuntimeException exception) {
+                try {
+                    connection.rollback();
+                } catch (SQLException rollbackException) {
+                    exception.addSuppressed(rollbackException);
+                }
+                throw exception;
+            } finally {
+                try {
+                    connection.setAutoCommit(true);
+                } catch (SQLException ignored) {
+                    System.err.println("Impossible de restaurer l'auto-commit SQLite.");
+                }
+            }
         } catch (SQLException e) {
             throw new IllegalStateException("Impossible d'enregistrer le dessin", e);
         }

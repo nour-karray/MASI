@@ -53,8 +53,9 @@ public class DrawingService implements Observable {
     }
 
     public void loadDrawing(long drawingId, String drawingName) {
+        List<DrawableShape> loadedShapes = drawingRepository.loadShapes(drawingId);
         currentShapes.clear();
-        currentShapes.addAll(drawingRepository.loadShapes(drawingId));
+        currentShapes.addAll(loadedShapes);
         notifyDrawingChanged("OUVRIR", "Dessin charge: " + drawingName);
     }
 

@@ -1,6 +1,6 @@
 ﻿# Mini Projet MASI
 
-Application JavaFX de dessin utilisant des Design Patterns.
+Petit projet pédagogique Java 17 permettant de dessiner, sauvegarder et rouvrir des formes avec SQLite.
 
 ## Fonctionnalites
 
@@ -19,16 +19,20 @@ Application JavaFX de dessin utilisant des Design Patterns.
 - Strategy : choix du type de journalisation
 - Observer : notification des changements du dessin
 
-## Execution
+## Stack
+
+Java 17, JavaFX, SQLite, Maven et JUnit 5.
+
+## Lancement
 
 Depuis le dossier du projet :
 
 ```powershell
-mvn clean javafx:run
+mvn javafx:run
 ```
 
-Ou dans Eclipse : Run As > Maven build... puis goal :
+## Tests
 
-```text
-clean javafx:run
+```powershell
+mvn test
 ```
