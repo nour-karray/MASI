@@ -14,6 +14,10 @@ public class ActionLoggerService {
     }
 
     public void log(String action, String details) {
-        loggerStrategy.log(action, details);
+        try {
+            loggerStrategy.log(action, details);
+        } catch (RuntimeException exception) {
+            System.err.println("Journalisation ignorée: " + exception.getMessage());
+        }
     }
 }
